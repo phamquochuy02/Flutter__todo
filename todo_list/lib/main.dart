@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'task_list_view.dart';
+import 'task_controller.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  TaskController().loadTasks();
   runApp(const MyApp());
 }
 

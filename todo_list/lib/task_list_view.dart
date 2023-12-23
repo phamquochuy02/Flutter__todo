@@ -3,10 +3,10 @@ import 'task_controller.dart';
 import 'task_model.dart';
 
 class TaskListView extends StatelessWidget {
-  const TaskListView({super.key});
+  const TaskListView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final model = TaskModel();
     final controller = TaskController();
     return Scaffold(
       appBar: AppBar(
@@ -14,12 +14,7 @@ class TaskListView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return const AddTaskDialog();
-                },
-              );
+              showAddTaskDialog(context);
             },
             icon: const Icon(Icons.add),
           )
@@ -28,15 +23,16 @@ class TaskListView extends StatelessWidget {
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
+          final tasks = controller.tasks;
           return ListView.builder(
-            itemCount: model.taskCount,
+            itemCount: tasks.length,
             itemBuilder: (context, index) {
-              final item = model.tasks[index];
+              final task = tasks[index];
               return CheckboxListTile(
-                title: Text(item.title),
-                value: item.isCompleted,
+                title: Text(task.title),
+                value: task.isCompleted,
                 onChanged: (bool? value) {
-                  controller.toggleTask(item);
+                  controller.toggleTask(task);
                 },
               );
             },
@@ -50,14 +46,15 @@ class TaskListView extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) {
-        return const AddTaskDialog();
+        return AddTaskDialog();
       },
     );
   }
 }
 
 class AddTaskDialog extends StatelessWidget {
-  const AddTaskDialog({super.key});
+  const AddTaskDialog({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final titleController = TextEditingController();
