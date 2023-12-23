@@ -30,6 +30,7 @@ Chạy lệnh flutter pub get để cài đặt các gói phụ thuộc.
 Kết nối thiết bị di động hoặc máy ảo và chạy lệnh flutter run để khởi chạy ứng dụng.
 
 #Yêu cầu
+
 Flutter SDK: [link](https://flutter.dev)
 
 SharedPreferences package: [link](https://pub.dev/packages/shared_preferences)
